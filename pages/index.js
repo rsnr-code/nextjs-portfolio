@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import {BsFillMoonStarsFill, BsGithub, BsLinkedin, } from 'react-icons/bs'
 import {SiCodewars} from 'react-icons/si'
+import Image from 'next/image'
+import deved from '../public/dev-ed-wave.png'
 
 export default function Home() {
   return (
@@ -32,6 +34,9 @@ export default function Home() {
             <BsLinkedin />
             <SiCodewars />     
           </div>
+        <div className='relative mx-auto bg-gradient-to-b from-teal-500 rounded-full w-80 h-80 mt-20 overflow-hidden'>
+          <Image src={deved} layout="fill" objectFit="cover"/>
+        </div>
         </section>
       </main>
     </>
