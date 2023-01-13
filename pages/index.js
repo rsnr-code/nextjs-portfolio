@@ -1,10 +1,11 @@
+import React from "react";
 import Head from "next/head";
 import {
   AiFillLinkedin,
   AiFillGithub
 } from "react-icons/ai";
 import { SiCodewars } from 'react-icons/si'
-import { BsFillMoonStarsFill, BsGithub } from "react-icons/bs";
+import { BsFillMoonStarsFill, BsGithub, BsInfoCircle } from "react-icons/bs";
 import { BiLinkExternal } from "react-icons/bi"
 import { useState } from "react";
 import Image from "next/legacy/image";
@@ -21,10 +22,15 @@ import quotestv from "../public/quotestv.png"
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
-  const [pic, setPic] = useState(false);
+  const [showDiagnoseModal, setShowDiagnoseModal] = useState(false);
+  const [showSetListenerModal, setShowSetListenerModal] = useState(false);
+  const [showMyNotesModal, setShowMyNotesModal] = useState(false);
+  const [showQuotesModal, setShowQuotesModal] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+
 
   const clickHandler = () => {
-    console.log("clicked");
     setDarkMode(!darkMode)
   }
 
@@ -109,15 +115,74 @@ export default function Home() {
             <h3 className="text-3xl py-1 mt-12 text-center dark:text-white">PROJECTS</h3>
           <div className="flex flex-col gap-10 py-10 lg:flex-row lg:flex-wrap">
             <div className="basis-1/3 flex-1 ">
-              <div className="flex justify-end gap-3 text-2xl dark:invert">
-              <BiLinkExternal />
-              <BsGithub />
-              </div>
+              
            <Image className="object-scale-down dark:invert"
                 width={"8%"}
                 height={"1%"}
                 layout="responsive"
                 src={diagnose} />
+             
+             <div className="flex justify-end gap-3 text-1xl dark:invert">
+             <button
+        type="button"
+        onClick={() => setShowDiagnoseModal(true)}
+      >
+        <BsInfoCircle className="hover:-translate-y-1 hover:scale-100"/>
+      </button>
+      {showDiagnoseModal ? (
+        <>
+          <div
+            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none overflow-auto"
+          >
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                  <h3 className="text-3xl font-semibold">
+                    Diagnose
+                  </h3>
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setShowDiagnoseModal(false)}
+                  >
+                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                      ×
+                    </span>
+                  </button>
+                </div>
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                  <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                  Diagnose is meant for medical experts to share images of particular cases they would like to initiate discussions on with other medical experts. It is a full-stack application built using Node.js as a backend JavaScript runtime environment, Express.js as a backend framework, MongoDB as a database, and EJS as a template language to generate HTML markup.
+
+Why did I build this app?
+
+After working in a hospital and interacting with medical experts, such as doctors and nurses, I noticed some recurring themes. We would have daily meetings with all the staff in our unit to discuss resident/patient symptoms and conditions. The medical staff would have pictures they would share between each other to discuss the diagnosis and treatment. Whilst thinking of a full-stack project, I came up with the idea of building an app where hospital staff could discuss cases based on shared images.
+
+                  </p>
+                </div>
+                {/*footer*/}
+                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setShowDiagnoseModal(false)}
+                  >
+                    Close
+                  </button>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
+              <BiLinkExternal className="hover:-translate-y-1 hover:scale-100"/>
+              <BsGithub className="hover:-translate-y-1 hover:scale-100"/>
+              </div>
+
               <Image
                 className="object-scale-down"
                 width={"100%"}
@@ -127,15 +192,71 @@ export default function Home() {
               />
             </div>
             <div className="basis-1/3 flex-1">
-            <div className="flex justify-end gap-3 text-2xl dark:invert">
-              <BiLinkExternal />
-              <BsGithub />
-              </div>
+            
               <Image className="object-scale-down dark:invert"
                 width={"8%"}
                 height={"1%"}
                 layout="responsive"
                 src={setlistener} />
+
+              <div className="flex justify-end gap-3 text-1xl dark:invert">
+              <button
+        type="button"
+        onClick={() => setShowModal(true)}
+      >
+        <BsInfoCircle className="hover:-translate-y-1 hover:scale-100"/>
+      </button>
+      {showModal ? (
+        <>
+          <div
+            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+          >
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                  <h3 className="text-3xl font-semibold">
+                   The Set Listener 
+                  </h3>
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setShowModal(false)}
+                  >
+                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                      ×
+                    </span>
+                  </button>
+                </div>
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                  <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                   wed down by their perception of
+                    themselves. If you're taught you can’t do anything, you
+                    won’t do anything. I was taught I could do everything.
+                  </p>
+                </div>
+                {/*footer*/}
+                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Close
+                  </button>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
+              <BiLinkExternal className="hover:-translate-y-1 hover:scale-100"/>
+              <BsGithub className="hover:-translate-y-1 hover:scale-100"/>
+              </div>
+
               <Image
                 className="object-scale-down"
                 width={"100%"}
@@ -145,15 +266,72 @@ export default function Home() {
               />
             </div>
             <div className="basis-1/3 flex-1">
-            <div className="flex justify-end gap-3 text-2xl dark:invert">
-              <BiLinkExternal />
-              <BsGithub />
-              </div>
+            
             <Image className="object-scale-down dark:invert"
                 width={"10%"}
                 height={"1%"}
                 layout="responsive"
                 src={mynotes} />
+
+              <div className="flex justify-end gap-3 text-1xl dark:invert">
+              <button
+        type="button"
+        onClick={() => setShowModal(true)}
+      >
+        <BsInfoCircle className="hover:-translate-y-1 hover:scale-100"/>
+      </button>
+      {showModal ? (
+        <>
+          <div
+            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+          >
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                  <h3 className="text-3xl font-semibold">
+                    Quotes Channel
+                  </h3>
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setShowModal(false)}
+                  >
+                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                      ×
+                    </span>
+                  </button>
+                </div>
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                  <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                    I always felt like I could do anything. That’s the main
+                    thing people are controlled by! Thoughts- their perception
+                    of themselves! They're slowed down by their perception of
+                    themselves. If you're taught you can’t do anything, you
+                    won’t do anything. I was taught I could do everything.
+                  </p>
+                </div>
+                {/*footer*/}
+                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Close
+                  </button>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
+              <BiLinkExternal className="hover:-translate-y-1 hover:scale-100"/>
+              <BsGithub className="hover:-translate-y-1 hover:scale-100"/>
+              </div>
                 
               <Image
                className="object-scale-down"
@@ -164,15 +342,74 @@ export default function Home() {
               />
             </div>
             <div className="basis-1/3 flex-1">
-            <div className="flex justify-end gap-3 text-2xl dark:invert">
-              <BiLinkExternal />
-              <BsGithub />
-              </div>
+            
             <Image className="object-scale-down dark:invert"
                 width={"12%"}
                 height={"1%"}
                 layout="responsive"
                 src={quotestv} />
+
+<div className="flex justify-end gap-3 text-1xl dark:invert">
+<button
+        type="button"
+        onClick={() => setShowModal(true)}
+      >
+        <BsInfoCircle className="hover:-translate-y-1 hover:scale-100"/>
+      </button>
+      {showModal ? (
+        <>
+          <div
+            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+          >
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                  <h3 className="text-3xl font-semibold">
+                    Quotes Channel
+                  </h3>
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setShowModal(false)}
+                  >
+                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                      ×
+                    </span>
+                  </button>
+                </div>
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                  <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                    I always felt like I could do anything. That’s the main
+                    thing people are controlled by! Thoughts- their perception
+                    of themselves! They're slowed down by their perception of
+                    themselves. If you're taught you can’t do anything, you
+                    won’t do anything. I was taught I could do everything.
+                  </p>
+                </div>
+                {/*footer*/}
+                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Close
+                  </button>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
+
+              <BiLinkExternal className="hover:-translate-y-1 hover:scale-100"/>
+              <BsGithub className="hover:-translate-y-1 hover:scale-100"/>
+              </div>
+
               <Image
                  className="object-scale-down"
                 width={"100%"}
